@@ -11,3 +11,19 @@ $client = new Client('http://localhost:8000', array(
     )
 ));
 
+
+$nickname = 'ObjectOrienter' . rand(0, 999);
+$data = [
+    'nickname' => $nickname,
+    'avatarNumber' => 5,
+    'tagLine' => 'a test dev!',
+];
+
+$request = $client->post('/api/programmers', ['Accept' => 'application/json'], json_encode($data));
+$response = $request->send();
+
+$request = $client->get('api/programmers/' . $nickname . 'dfs');
+$response = $request->send();
+
+echo $response;
+echo "\n\n";
