@@ -13,7 +13,7 @@ class ProgrammerController extends BaseController
     protected function addRoutes(ControllerCollection $controllers)
     {
         $controllers->post('/api/programmers', array($this, 'newAction'));
-        $controllers->get('/api/programmers/{nickname}', [$this, 'showAction']);
+        $controllers->get('/api/programmers/{nickname}', [$this, 'showAction'])->bind('api_programmers_show');
     }
 
     public function newAction(Request $request)
@@ -26,8 +26,12 @@ class ProgrammerController extends BaseController
 
         $this->save($programmer);
 
+        $url = $this->generateUrl('api_programmers_show', [
+            'nickname' => $programmer->nickname
+        ]);
+
         $response = new Response('It worked. Believe me - I\'m an API', 201);
-        $response->headers->set('Location', '/programmers/not/fake...');
+        $response->headers->set('Location', $url);
         return $response;
     }
 

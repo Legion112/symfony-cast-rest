@@ -22,7 +22,11 @@ $data = [
 $request = $client->post('/api/programmers', ['Accept' => 'application/json'], json_encode($data));
 $response = $request->send();
 
-$request = $client->get('api/programmers/' . $nickname . 'dfs');
+echo $response;
+echo "\n\n";
+
+$url = $response->getHeader('Location');
+$request = $client->get($url);
 $response = $request->send();
 
 echo $response;
