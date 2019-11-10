@@ -31,3 +31,10 @@ $response = $request->send();
 
 echo $response;
 echo "\n\n";
+
+
+$request = $client->get('/api/programmers');
+$response = $request->send();
+
+echo $response;
+echo "\n\n";
